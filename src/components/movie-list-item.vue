@@ -19,7 +19,13 @@
                 <p
                         :class="['rating',{'none': !item.rating.average}]"
                 >
-                    {{ item.rating.average ? item.rating.average.toFixed(1) : '暂无评分' }}
+                    <span
+                            class="rating-star"
+                            v-show="item.rating.average"
+                            :style="{'background-position-y': `${getStarPosition(item)}rem` }"
+                    >
+                    </span>
+                    <span>{{ item.rating.average ? item.rating.average.toFixed(1) : '暂无评分' }}</span>
                 </p>
             </div>
         </router-link>
@@ -53,6 +59,11 @@ export default {
       type: Boolean
     }
   },
+  methods: {
+    getStarPosition (item) {
+      return Math.round(item.rating.average) - 10
+    }
+  },
   components: {
     swiperSlide
   },
@@ -72,7 +83,7 @@ export default {
             .img-wp {
                 position: relative;
                 overflow: hidden;
-                &::before{
+                &::before {
                     content: '';
                     display: block;
                     padding-top: 143%;
@@ -98,6 +109,7 @@ export default {
                 }
             }
             .info {
+                height: 42px;
                 p {
                     padding-top: 2px;
                     font-size: 1.2em;
@@ -105,6 +117,19 @@ export default {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     text-align: left;
+                    span {
+                        vertical-align: middle;
+                    }
+                    .rating-star {
+                        display: inline-block;
+                        width: 5rem;
+                        height: 1rem;
+                        background: {
+                            image: url("../assets/sprite/sprite-raing.png");
+                            repeat: no-repeat;
+                            size: cover;
+                        }
+                    }
                     &.rating {
                         font-weight: normal;
                         font-size: 1em;

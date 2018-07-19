@@ -42,18 +42,9 @@ export default {
 }
 </script>
 
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
-    }
-
-    #app {
-    }
-</style>
 <style lang="scss" scoped>
     .el-main {
+        position: relative;
         margin: auto;
         max-width: 992px;
         width: 100%;
@@ -63,20 +54,6 @@ export default {
         }
     }
 
-    $fe: 'fade-enter';
-    $fl: 'fade-leave';
-    .#{$fe},
-    .#{$fl}-to {
-        opacity: 0;
-    }
 
-    .#{$fe}-to,
-    .#{$fl} {
-        opacity: 1;
-    }
 
-    .#{$fe}-active,
-    .#{$fl}-active {
-        transition: all 0.2s ease-in-out;
-    }
 </style>

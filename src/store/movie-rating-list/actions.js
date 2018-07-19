@@ -1,6 +1,6 @@
 import {doubanRequest} from '../../jsModule/jsonPrequest'
 import isPromise from '../../jsModule/isPromise'
-import type from './movie-rating-type'
+import type from '../../assets/json/movie-rating-type'
 
 const makeIsRequesting = (type) => {
   const obj = Object.create(null)

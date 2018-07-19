@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+$fe: 'fade-enter';
+$fl: 'fade-leave';
+.#{$fe},
+.#{$fl}-to {
+  opacity: 0;
+}
+
+.#{$fe}-to,
+.#{$fl} {
+  opacity: 1;
+}
+
+.#{$fe}-active,
+.#{$fl}-active {
+  transition: all 0.2s ease-in-out;
+}

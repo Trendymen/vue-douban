@@ -14,7 +14,8 @@ export default new vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     vmin: 0,
-    city: undefined
+    city: undefined,
+    backUrl: ''
   },
   mutations,
   actions,

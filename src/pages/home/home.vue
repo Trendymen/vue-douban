@@ -18,7 +18,7 @@ import movieList from './movie-list'
 import fakeSearch from '../../components/fake-search'
 
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
     movieList,
     fakeSearch

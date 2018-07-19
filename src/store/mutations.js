@@ -4,5 +4,8 @@ export default {
   },
   changeCity (state, {city}) {
     state.city = city
+  },
+  changeBackUrl (state, {path}) {
+    state.backUrl = path
   }
 }

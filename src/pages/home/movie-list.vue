@@ -49,6 +49,7 @@ export default {
         slidesPerView: 'auto',
         touchMoveStopPropagation: true,
         freeMode: true,
+        mousewheel: true,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -101,7 +102,6 @@ export default {
         color: #333;
         padding: 7px 0;
         border-top: 1px solid gainsboro;
-        font-weight: bold;
         .list-title {
             .more {
                 margin-left: auto;
@@ -125,7 +125,7 @@ export default {
 
         .movie-list {
             $width: 100px;
-            height: $width*1.43 + 39px;
+            height: $width*1.43 + 42px;
             .horizontal {
                 width: $width;
                 margin-right: 2vmin;

@@ -1,34 +1,34 @@
 <template>
-    <transition name="search-fade">
-    <div class="fake-search-wrapper">
-        <div class="fake-search">
-            <span>搜索电影</span>
+    <transition name="fade" mode="out-in">
+        <div v-show="show" class="fake-search-wrapper">
+            <div class="fake-search">
+                <span>搜索电影</span>
+            </div>
         </div>
-    </div>
     </transition>
 </template>
 
 <script>
 export default {
-  name: 'fake-search'
+  name: 'fake-search',
+  data () {
+    return {
+      show: true
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.show = to.name === 'home' || to.name === 'search' || to.name === 'movies-explore'
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-    .search-fade-leave-active,
-    .search-fade-enter-active
-    {
-        transition: all 0.2s ease-in-out;
-    }
-    .search-fade-leave,
-    .search-fade-enter-to
-    {
-        transform: translateY(0);
-    }
-    .search-fade-leave-to,
-    .search-fade-enter
-    {
-        transform: translateY(100%);
+    .fade-enter-active {
+        position: absolute;
+        width: 100%;
+        transition: opacity 0.2s  ease-in-out;
     }
     .fake-search-wrapper {
         box-sizing: border-box;
