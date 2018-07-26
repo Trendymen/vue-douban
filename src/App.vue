@@ -1,15 +1,15 @@
 <template>
-    <el-container id="app" direction="vertical">
+    <v-app id="app" direction="vertical">
         <nav-header/>
-        <el-main>
+        <v-content>
             <fake-search></fake-search>
             <transition name="fade" mode="out-in">
                 <keep-alive>
                     <router-view class="main-panel"/>
                 </keep-alive>
             </transition>
-        </el-main>
-    </el-container>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
@@ -41,19 +41,15 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
+<style lang="scss">
     .el-main {
         position: relative;
         margin: auto;
         max-width: 992px;
         width: 100%;
-        padding: 0;
+        padding: 0 5%;
         .main-panel {
             /*padding-top: 5.5em;*/
         }
     }
-
-
-
 </style>

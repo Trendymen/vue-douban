@@ -1,6 +1,5 @@
 import actions from './actions'
 import type from '../../assets/json/movie-rating-type'
-import Vue from 'vue'
 
 const makeListState = (type) => {
   const obj = {}

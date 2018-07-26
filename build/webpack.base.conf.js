@@ -39,7 +39,7 @@ module.exports = {
     }
   },
   externals: {
-    AMap:"AMap"
+    AMap: 'AMap'
   },
   module: {
     rules: [
@@ -55,7 +55,7 @@ module.exports = {
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
-        test:/\.json$/,
+        test: /\.json$/,
         loader: 'json-loader'
       },
       {

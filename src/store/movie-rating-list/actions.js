@@ -1,4 +1,4 @@
-import {doubanRequest} from '../../jsModule/jsonPrequest'
+import {doubanRequest, APILimitError} from '../../jsModule/jsonPrequest'
 import isPromise from '../../jsModule/isPromise'
 import type from '../../assets/json/movie-rating-type'
 
@@ -15,14 +15,14 @@ const isRequesting = makeIsRequesting(type)
 export default {
   // 获取电影排行榜列表
   async getRatingList ({commit, rootState, state, dispatch}, {type, refresh = false, ...params}) {
-    const beforeCount = state[type].length;
-    (isPromise(isRequesting[type]) && !refresh) || await isRequesting[type]
     if (type === 'in_theaters' || 'coming_soon') {
       params = {
         city: await dispatch('getCityName', null, {root: true}),
         ...params
       }
     }
+    isPromise(isRequesting[type]) && !refresh && await isRequesting[type]
+    const beforeCount = state[type].length
     isRequesting[type] = doubanRequest(`/movie/${type}`, {
       params: {
         ...params,
@@ -30,11 +30,22 @@ export default {
         count: params.count || 10
       }
     })
-    const {body: {count, subjects: {length: resNum}, subjects: subjects}} = await isRequesting[type]
-    isRequesting[type] = null
-    commit('setRatingList', {type, refresh, data: subjects})
-    return {
-      isEnd: resNum < count
+    try {
+      const {body: {total, subjects: {length: resNum}, subjects: subjects}} = await isRequesting[type]
+      commit('setRatingList', {type, refresh, data: subjects})
+      isRequesting[type] = undefined
+      return {
+        isEnd: !(state[type].length < total)
+      }
+    } catch (e) {
+      isRequesting[type] = undefined
+      if (e instanceof APILimitError) {
+        console.log(e)
+        return {
+          error: true,
+          isEnd: false
+        }
+      }
     }
   }
 }

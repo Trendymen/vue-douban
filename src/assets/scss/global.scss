@@ -1,0 +1,40 @@
+$divide-line: 1px solid #f3f3f3;
+
+$fe: 'fade-enter';
+$fl: 'fade-leave';
+.#{$fe},
+.#{$fl}-to {
+  opacity: 0;
+}
+
+.#{$fe}-to,
+.#{$fl} {
+  opacity: 1;
+}
+
+.#{$fe}-active,
+.#{$fl}-active {
+  transition: all 0.2s ease-in-out;
+}
+
+@mixin padding {
+  padding: {
+    left: 24px;
+    right: 24px
+  }
+  @media only screen and (max-width: 959px) {
+    padding: {
+      left: 16px;
+      right: 16px
+    }
+  }
+  @media only screen and(min-width: 960px) {
+    max-width: 900px;
+  }
+  @media only screen and (min-width: 1264px) {
+    max-width: 1185px;
+  }
+  @media only screen and (min-width: 1904px) {
+    max-width: 1785px;
+  }
+}

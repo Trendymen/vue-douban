@@ -1,49 +1,51 @@
 <template>
-    <div class="wrapper">
-        <div class="movies-explore-wrapper">
-            <!--<ul class="movie-list">-->
-            <!--<movie-list-item-->
-            <!--class="movie-item"-->
-            <!--v-for="(item,index) in list"-->
-            <!--:key="item.title"-->
-            <!--:item="item"-->
-            <!--:index="index"-->
-            <!--:to="`/movie-detail/${ index }`"-->
-            <!--&gt;-->
-            <!--</movie-list-item>-->
-            <!--</ul>-->
-            <el-row
-                    class="movie-list"
-                    :gutter="25"
-                    tag="ul"
+    <v-layout column class="container">
+        <h1 class="title">{{typeName[type]}}</h1>
+        <div
+                v-infinite-scroll="getList"
+                :infinite-scroll-disabled="false"
+                infinite-scroll-distance="20"
+                infinite-scroll-immediate-check="false"
+        >
+            <v-container
+                    class="movies-explore-wrapper"
+                    fluid
+                    v-bind="{[`grid-list-${$vuetify.breakpoint.width>1264?$vuetify.breakpoint.name:'lg'}`]:true}"
             >
-                <el-col
-                        class="movie-item"
-                        v-for="(item,index) in list"
-                        :key="item.title"
-                        :xs="8"
-                        :sm="6"
-                        :md="4"
-                        tag="li"
+                <v-layout row wrap
+                          class="movie-list"
+                          tag="ul"
+                          fluid
                 >
-                    <movie-list-item
-                            :item="item"
-                            :index="index"
-                            :to="`/movie-detail/${ index }`"
-                    />
-                </el-col>
-            </el-row>
+                    <v-flex
+                            class="movie-item"
+                            v-for="(item,index) in list"
+                            :key="item.title"
+                            xs4
+                            sm3
+                            md2
+                            tag="li"
+                    >
+                        <movie-list-item
+                                :item="item"
+                                :index="index"
+                                :to="`/movie-detail/${ index }`"
+                        />
+                    </v-flex>
+                </v-layout>
+                <p class="text-xs-center always-loading">loading...</p>
+            </v-container>
         </div>
-    </div>
+    </v-layout>
 </template>
 
 <script>
+
 import fakeSearch from '../../components/fake-search'
 import movieListItem from '../../components/movie-list-item'
 import {mapState, mapActions} from 'vuex'
 
 function changeDataOnReuse (ctx, propsObj) {
-  console.log(ctx.$data, propsObj)
   Object.assign(ctx.$data, propsObj)
 }
 
@@ -62,21 +64,31 @@ export default {
   },
   data () {
     return {
-      updated: false,
-      type: null
+      loading: {},
+      type: null,
+      typeName: {'in_theaters': '正在热映', 'coming_soon': '即将上映'}
     }
   },
   computed: {
     ...mapState(`movieRatingList`, {
-      list: function (state) {
+      list (state) {
         return state[this.type]
       }
     })
   },
+  beforeCreate () {
+  },
+  created () {
+  },
   methods: {
     ...mapActions('movieRatingList', ['getRatingList']),
     getList (params) {
-      return this.getRatingList({type: this.type, ...params})
+      if (!this.loading[this.type]) {
+        this.loading[this.type] = true
+        this.getRatingList({type: this.type, ...params}).then(({isEnd}) => {
+          this.loading[this.type] = isEnd
+        })
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -92,36 +104,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .wrapper {
-        padding: 0 4%;
+    .container {
+        padding: {
+            top: 0;
+            bottom: 0;
+        }
+        .title {
+            padding: 16px 0;
+        }
         .movies-explore-wrapper {
-            height: 100%;
-            overflow: hidden;
+            padding: 0;
             .movie-list {
                 list-style: none;
                 .movie-item {
-                    /*display: inline-block;*/
-                    /*width: 33.33%;*/
-                    /*box-sizing: border-box;*/
-                    /*padding-left: 4%;*/
-                    /*padding-right: 4%;*/
-                    /*margin-top: 2%;*/
-                    /*@media screen and (min-width: 600px) {*/
-                    /*width: 25%;*/
-                    /*}*/
-                    &.el-col-xs-8 {
-                        @media only screen and (max-width: 600px) {
-                            width: 33.33333%;
-                        }
-                    }
-                    &.el-col-sm-6 {
-                        @media only screen and (min-width: 600px) and (max-width: 768px) {
-                            width: 25%;
-                        }
-                    }
-                    &:last-child {
-                    }
+
                 }
+            }
+            .always-loading{
+              font-size: 1.5rem;
             }
         }
     }

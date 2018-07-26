@@ -2,7 +2,6 @@
     <div class="home-movie-list-pane">
         <p class="list-title">
             <span><slot name="title"></slot></span>
-            <button @click="$store.commit('changeCity',{city:'怀化'})">change city</button>
             <router-link
                     class="more"
                     :to="{name : 'movies-explore' , params : {type}}"
@@ -100,40 +99,56 @@ export default {
 <style lang="scss" scoped>
     .home-movie-list-pane {
         color: #333;
-        padding: 7px 0;
-        border-top: 1px solid gainsboro;
+        &:not(:last-child) {
+            border-bottom: $divide-line;
+        }
         .list-title {
+            * {
+                font-size: 1.2em
+            }
+            display: flex;
+            position: relative;
+            padding: {
+                top: 0.5em;
+                bottom: 0.5em;
+            }
+            //@include padding;
+            @media only screen and (max-width: 950px) {
+                padding: {
+                    left: 16px;
+                    right: 16px;
+                }
+            }
+            span {
+            }
             .more {
                 margin-left: auto;
                 color: #2aac5e;
                 text-decoration: none;
             }
-            display: flex;
-            position: relative;
-            padding-left: 10px;
-            margin: 0 7px 7px 0;
-            &::before {
-                position: absolute;
-                display: block;
-                left: 0;
-                content: "";
-                width: 6.67px;
-                height: 100%;
-                background-color: #2aac5e;
-            }
+            /*&::before {*/
+            /*position: absolute;*/
+            /*display: block;*/
+            /*left: 0;*/
+            /*content: "";*/
+            /*width: 6.67px;*/
+            /*height: 100%;*/
+            /*background-color: #2aac5e;*/
+            /*}*/
         }
 
         .movie-list {
             $width: 100px;
             height: $width*1.43 + 42px;
-            .horizontal {
+            .movie-item {
                 width: $width;
                 margin-right: 2vmin;
                 &:first-child {
-                    margin-left: 2vmin;
+                    margin-left: 16px;
                 }
-            }
-            .vertical {
+                &:last-child {
+                    margin-right: 16px;
+                }
             }
         }
 

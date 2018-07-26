@@ -2,7 +2,15 @@
     <div class="not-found">
         <p class="notice-chinese">没有找到这个东西</p>
         <p>o(╥﹏╥)o</p>
-        <router-link :to="{name:'home'}" tag="el-button" class="el-button--success">点击这里返回首页</router-link>
+        <v-btn
+                class="el-button--success"
+                :to="{name:'home'}"
+                tag="v-btn "
+                color="success"
+        >
+            点击这里返回首页
+        </v-btn>
+        <!--<router-link ></router-link>-->
     </div>
 </template>
 
@@ -17,19 +25,24 @@ export default {
         margin-top: 150px;
         text-align: center;
         width: 100%;
-        color: #b2b2b2;
         p {
+            color: #b2b2b2;
             line-height: 2em;
             font-size: 1.5em;
             &.notice-chinese {
             }
         }
-        .el-button.el-button--success {
-            margin-top: 10px;
-            color: white;
-            background-color: #2aac5e;
-            &:hover {
-                background-color: #1fc375;
+        .el-button {
+            &.el-button--success {
+                margin-top: 10px;
+                background-color: #2aac5e;
+                color: white;
+                span {
+                    color: white;
+                }
+                &:hover {
+                    background-color: #1fc375;
+                }
             }
         }
     }

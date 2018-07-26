@@ -1,16 +1,14 @@
 <template>
-    <div>
+    <v-container fluid class="container">
         <div class="movie-list-pane-wrapper">
-            <div>
-                <movie-list type="in_theaters">
-                    <template slot="title">正在热映</template>
-                </movie-list>
-                <movie-list type="coming_soon">
-                    <template slot="title">即将上映</template>
-                </movie-list>
-            </div>
+            <movie-list type="in_theaters">
+                <template slot="title">正在热映</template>
+            </movie-list>
+            <movie-list type="coming_soon">
+                <template slot="title">即将上映</template>
+            </movie-list>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -28,5 +26,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .container {
+        @include padding;
+        @media only screen and (max-width: 960px) {
+            padding: 0;
+        }
+    }
 </style>

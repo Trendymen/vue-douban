@@ -27,22 +27,30 @@ export default {
 <style lang="scss" scoped>
     .fade-enter-active {
         position: absolute;
-        width: 100%;
-        transition: opacity 0.2s  ease-in-out;
-    }
-    .fake-search-wrapper {
         box-sizing: border-box;
-        /*background-color: #2aac5e;*/
-        padding: 0.5em 4%;
-        /*padding-top: 0;*/
-        height: 3em;
-        color: #a9a9a9;
+        width: 100%;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .fake-search-wrapper {
+        @include padding;
+        margin: auto;
+        padding: {
+            top: 0.5em;
+            bottom: 0.5em;
+        }
+        * {
+            color: #a9a9a9;
+        }
+        border: {
+            bottom: $divide-line
+        }
         .fake-search {
             text-align: center;
-            line-height: 2em;
+            line-height: 2.5em;
+            height: 2.5em;
             background-color: #dedede;
             border-radius: 1em;
-            height: 100%;
         }
     }
 </style>

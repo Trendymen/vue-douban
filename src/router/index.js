@@ -43,7 +43,7 @@ const router = new Router({
       setTimeout(() => {
         console.log(savedPosition)
         resolve(savedPosition || {x: 0, y: 0})
-      }, 400)
+      }, 300)
     })
   },
   mode: 'hash',

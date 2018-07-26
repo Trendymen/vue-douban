@@ -1,6 +1,13 @@
 import AMap from 'AMap'
 
-const Geolocation = new AMap.Geolocation({})
+let Geolocation
+
+try {
+  Geolocation = new AMap.Geolocation({})
+}
+catch (e) {
+  console.log('AMP加载失败')
+}
 
 export default function () {
   return new Promise((resolve, reject) => {
