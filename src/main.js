@@ -1,9 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
-import 'babel-polyfill'
-import 'intersection-observer'
-
 import Vue from 'vue'
 import store from './store/index'
 import router from './router'
@@ -11,7 +8,6 @@ import router from './router'
 import vueResource from 'vue-resource'
 import lazyLoad from 'vue-lazyload/vue-lazyload'
 import infiniteScroll from 'vue-infinite-scroll'
-import 'element-ui/lib/theme-chalk/index.css'
 import Vuetify from 'vuetify'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'vuetify/dist/vuetify.min.css'

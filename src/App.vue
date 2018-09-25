@@ -15,11 +15,11 @@
 <script>
 import navHeader from './components/nav-header'
 import fakeSearch from './components/fake-search'
-import _ from 'lodash'
+import debounce from 'lodash/debounce'
 import {mapMutations, mapActions} from 'vuex'
 
 const {changeVmin} = mapMutations(['changeVmin'])
-const getVmin = _.debounce(changeVmin, 250)
+const getVmin = debounce(changeVmin, 250)
 
 export default {
   name: 'App',
