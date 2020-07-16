@@ -14,7 +14,7 @@
     "better-scroll": "^1.12.6",
     "hoek": "^4.2.1",
     "intersection-observer": "^0.5.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "swiper": "^4.4.1",
     "vue": "^2.5.17",
     "vue-awesome-swiper": "^3.1.3",
